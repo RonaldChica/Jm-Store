@@ -1,11 +1,7 @@
 <template>
-  <Head title="Log in" />
+  <Head title="Reset Password" />
 
   <ValidationErrors class="mb-4" />
-
-  <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-    {{ status }}
-  </div>
 
   <form @submit.prevent="submit">
     <div>
@@ -29,48 +25,38 @@
         class="mt-1 block w-full"
         v-model="form.password"
         required
-        autocomplete="current-password"
+        autocomplete="new-password"
       />
     </div>
 
-    <div class="block mt-4">
-      <label class="flex items-center">
-        <Checkbox name="remember" v-model:checked="form.remember" />
-        <span class="ml-2 text-sm text-gray-600">Remember me</span>
-      </label>
+    <div class="mt-4">
+      <Label for="password_confirmation" value="Confirm Password" />
+      <Input
+        id="password_confirmation"
+        type="password"
+        class="mt-1 block w-full"
+        v-model="form.password_confirmation"
+        required
+        autocomplete="new-password"
+      />
     </div>
 
     <div class="flex items-center justify-end mt-4">
-      <Link
-        v-if="canResetPassword"
-        :href="route('password.request')"
-        class="underline text-sm text-gray-600 hover:text-gray-900 ml-4"
-      >
-        Forgot your password?
-      </Link>
-
       <Button
-        class="ml-4"
         :class="{ 'opacity-25': form.processing }"
         :disabled="form.processing"
       >
-        Log in
+        Reset Password
       </Button>
     </div>
   </form>
-  <a
-    :href="route('socialite.redirect')"
-    class="underline text-sm text-gray-600 hover:text-gray-900"
-    >Login with google</a
-  >
 </template>
 
 <script>
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3';
 
 import GuestLayout from '@core/layout/guest';
 import Button from '@/shared/base/button';
-import Checkbox from '@/shared/base/checkbox';
 import Input from '@/shared/base/input';
 import Label from '@/shared/base/label';
 import ValidationErrors from '@/shared/base/validation-errors';
@@ -80,33 +66,32 @@ export default {
 
   components: {
     Button,
-    Checkbox,
     Input,
     Label,
     ValidationErrors,
     Head,
-    Link,
   },
 
   props: {
-    canResetPassword: Boolean,
-    status: String,
+    email: String,
+    token: String,
   },
 
   data() {
     return {
       form: this.$inertia.form({
-        email: '',
+        token: this.token,
+        email: this.email,
         password: '',
-        remember: false,
+        password_confirmation: '',
       }),
     };
   },
 
   methods: {
     submit() {
-      this.form.post(this.route('login'), {
-        onFinish: () => this.form.reset('password'),
+      this.form.post(this.route('password.update'), {
+        onFinish: () => this.form.reset('password', 'password_confirmation'),
       });
     },
   },

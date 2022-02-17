@@ -1,14 +1,23 @@
 <template>
-  <Head title="Log in" />
+  <Head title="Register" />
 
   <ValidationErrors class="mb-4" />
 
-  <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-    {{ status }}
-  </div>
-
   <form @submit.prevent="submit">
     <div>
+      <Label for="name" value="Name" />
+      <Input
+        id="name"
+        type="text"
+        class="mt-1 block w-full"
+        v-model="form.name"
+        required
+        autofocus
+        autocomplete="name"
+      />
+    </div>
+
+    <div class="mt-4">
       <Label for="email" value="Email" />
       <Input
         id="email"
@@ -16,7 +25,6 @@
         class="mt-1 block w-full"
         v-model="form.email"
         required
-        autofocus
         autocomplete="username"
       />
     </div>
@@ -29,24 +37,28 @@
         class="mt-1 block w-full"
         v-model="form.password"
         required
-        autocomplete="current-password"
+        autocomplete="new-password"
       />
     </div>
 
-    <div class="block mt-4">
-      <label class="flex items-center">
-        <Checkbox name="remember" v-model:checked="form.remember" />
-        <span class="ml-2 text-sm text-gray-600">Remember me</span>
-      </label>
+    <div class="mt-4">
+      <Label for="password_confirmation" value="Confirm Password" />
+      <Input
+        id="password_confirmation"
+        type="password"
+        class="mt-1 block w-full"
+        v-model="form.password_confirmation"
+        required
+        autocomplete="new-password"
+      />
     </div>
 
     <div class="flex items-center justify-end mt-4">
       <Link
-        v-if="canResetPassword"
-        :href="route('password.request')"
-        class="underline text-sm text-gray-600 hover:text-gray-900 ml-4"
+        :href="route('login')"
+        class="underline text-sm text-gray-600 hover:text-gray-900"
       >
-        Forgot your password?
+        Already registered?
       </Link>
 
       <Button
@@ -54,15 +66,10 @@
         :class="{ 'opacity-25': form.processing }"
         :disabled="form.processing"
       >
-        Log in
+        Register
       </Button>
     </div>
   </form>
-  <a
-    :href="route('socialite.redirect')"
-    class="underline text-sm text-gray-600 hover:text-gray-900"
-    >Login with google</a
-  >
 </template>
 
 <script>
@@ -70,7 +77,6 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 
 import GuestLayout from '@core/layout/guest';
 import Button from '@/shared/base/button';
-import Checkbox from '@/shared/base/checkbox';
 import Input from '@/shared/base/input';
 import Label from '@/shared/base/label';
 import ValidationErrors from '@/shared/base/validation-errors';
@@ -80,7 +86,6 @@ export default {
 
   components: {
     Button,
-    Checkbox,
     Input,
     Label,
     ValidationErrors,
@@ -88,25 +93,22 @@ export default {
     Link,
   },
 
-  props: {
-    canResetPassword: Boolean,
-    status: String,
-  },
-
   data() {
     return {
       form: this.$inertia.form({
+        name: '',
         email: '',
         password: '',
-        remember: false,
+        password_confirmation: '',
+        terms: false,
       }),
     };
   },
 
   methods: {
     submit() {
-      this.form.post(this.route('login'), {
-        onFinish: () => this.form.reset('password'),
+      this.form.post(this.route('register'), {
+        onFinish: () => this.form.reset('password', 'password_confirmation'),
       });
     },
   },
