@@ -58,11 +58,6 @@
       </Button>
     </div>
   </form>
-  <a
-    :href="route('socialite.redirect')"
-    class="underline text-sm text-gray-600 hover:text-gray-900"
-    >Login with google</a
-  >
 </template>
 
 <script>
