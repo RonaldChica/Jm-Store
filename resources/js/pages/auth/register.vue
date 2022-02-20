@@ -3,7 +3,13 @@
 
   <ValidationErrors class="mb-4" />
 
-  <form @submit.prevent="submit">
+  <form action="#" method="POST" @submit.prevent="recaptcha" id="registerForm">
+    <input
+      type="hidden"
+      class="g-recaptcha"
+      name="captcha_token"
+      id="captcha_token"
+    />
     <div>
       <Label for="name" value="Name" />
       <Input
@@ -34,6 +40,7 @@
       <Input
         id="password"
         type="password"
+        name="password"
         class="mt-1 block w-full"
         v-model="form.password"
         required
@@ -46,6 +53,7 @@
       <Input
         id="password_confirmation"
         type="password"
+        name="password_confirmation"
         class="mt-1 block w-full"
         v-model="form.password_confirmation"
         required
@@ -74,8 +82,10 @@
 
 <script>
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import { useReCaptcha } from "vue-recaptcha-v3";
 
 import GuestLayout from '@core/layout/guest';
+
 import Button from '@/shared/base/button';
 import Input from '@/shared/base/input';
 import Label from '@/shared/base/label';
@@ -94,23 +104,33 @@ export default {
   },
 
   data() {
-    return {
-      form: this.$inertia.form({
+     const form = this.$inertia.form({
         name: '',
         email: '',
         password: '',
         password_confirmation: '',
+        captcha_token: '',
         terms: false,
-      }),
-    };
-  },
-
-  methods: {
-    submit() {
-      this.form.post(this.route('register'), {
-        onFinish: () => this.form.reset('password', 'password_confirmation'),
       });
-    },
+
+    const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
+
+    const recaptcha = async () => {
+      await recaptchaLoaded();
+      form.captcha_token = await executeRecaptcha('login');
+      submit();
+    }
+
+    function submit() {
+      form.post(route('register'), {
+        preserveScroll: true,
+        onSuccess: () => form.reset('password', 'password_confirmation'),
+      });
+    }
+
+    return {
+      form ,recaptcha, submit
+    }
   },
 };
 </script>
