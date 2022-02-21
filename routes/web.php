@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RecargaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,10 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return Inertia::render('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('recargas', RecargaController::class)
+    ->middleware(['auth', 'verified'])
+    ->except(['create']);
 
 Route::resource('topics', TopicController::class)
     ->middleware(['auth', 'verified'])

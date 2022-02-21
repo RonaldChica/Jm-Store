@@ -17,5 +17,6 @@ use App\Broadcasting\TopicQuestionChannel;
 */
 
 Broadcast::channel('topics', TopicChannel::class);
+Broadcast::channel('recargas', RecargaChannel::class);
 Broadcast::channel('questions', QuestionChannel::class);
 Broadcast::channel('topics.{id}.question', TopicQuestionChannel::class);
