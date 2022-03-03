@@ -5606,6 +5606,11 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
+vue-gates@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/vue-gates/-/vue-gates-2.1.2.tgz#89d6951ec4a0bb3291fe986fa3bb93c262d3910e"
+  integrity sha512-65IqVyR6KACdPxmOwz61gTLUCZnDU2DxkJmu8OiFM8/cBPBKtsCNe1+R32JcOZjLeIqKKkDS6N7ZY0+xbtVnBQ==
+
 vue-loader@^16.1.2:
   version "16.8.3"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-16.8.3.tgz#d43e675def5ba9345d6c7f05914c13d861997087"

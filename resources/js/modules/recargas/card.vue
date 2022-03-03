@@ -10,10 +10,18 @@
       <Link class="underline" :href="route('recargas.show', recarga.id)">
         Show
       </Link>
-      <Link class="underline" :href="route('recargas.edit', recarga.id)">
+      <Link
+        v-role:any="'super|admin'"
+        class="underline"
+        :href="route('recargas.edit', recarga.id)"
+      >
         Edit
       </Link>
-      <span class="cursor-pointer underline" @click="removeAction(recarga.id)">
+      <span
+        v-role:any="'super|admin'"
+        class="cursor-pointer underline"
+        @click="removeAction(recarga.id)"
+      >
         Remove
       </span>
     </div>
@@ -25,11 +33,11 @@ import { Link } from '@inertiajs/inertia-vue3';
 
 export default {
   components: {
-    Link
+    Link,
   },
   props: {
     recarga: Object,
-    removeAction: Function
-  }
+    removeAction: Function,
+  },
 };
 </script>

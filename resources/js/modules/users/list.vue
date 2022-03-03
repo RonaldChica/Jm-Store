@@ -7,23 +7,23 @@
       <HeaderCell v-for="field in fields" :key="field">
         {{ field }}
       </HeaderCell>
-      <HeaderCell>
+      <!-- <HeaderCell>
         actions
-      </HeaderCell>
+      </HeaderCell> -->
     </template>
     <template v-slot:tbody>
-      <tr v-for="item in users" :key="item.id">
+      <tr v-for="user in users" :key="user.id">
         <DataCell>
-          <img class="rounded-full" :src="item.avatar" />
+          <img width="48" height="48" class="rounded-full max-w-min" :src="user.avatar" />
         </DataCell>
         <DataCell v-for="key in fields" :key="key">
-          {{ item[key] }}
+          {{ user[key] }}
         </DataCell>
-        <DataCell>
-          <Link class="underline mr-2" :href="route('users.show', item.id)">
+        <!-- <DataCell>
+          <Link class="underline mr-2" :href="route('users.show', user.id)">
             Show
           </Link>
-        </DataCell>
+        </DataCell> -->
       </tr>
     </template>
   </Table>
@@ -55,7 +55,8 @@ export default {
         'google_token',
         'google_refresh_token',
         'google_id',
-        'email_verified_at'
+        'email_verified_at',
+        'roles'
       ]
     }
   },

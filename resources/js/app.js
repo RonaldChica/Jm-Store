@@ -3,6 +3,9 @@ import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3'
+import VueGates from 'vue-gates'
+
+import Permissions from './core/plugins/permissions.ts';
 
 const appName =
   window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
@@ -15,6 +18,8 @@ createInertiaApp({
     return createApp({ render: () => h(app, props) })
       .use(plugin)
       .use(VueReCaptcha, { siteKey: captcheKey } )
+      .use(VueGates)
+      .use(Permissions)
       .mixin({ methods: { route } })
       .mount(el);
   },

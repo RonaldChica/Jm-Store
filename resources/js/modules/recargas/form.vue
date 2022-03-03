@@ -1,11 +1,11 @@
 <template>
   <form @submit.prevent="submit">
-    <div class="form-control mr-5 h-10">
+    <div class="form-control w-1/2 mr-5 h-10">
       <Input
         id="playerId"
         type="text"
         playerId="playerId"
-        class="md:w-1/2 lg:w-1/4"
+        class="w-1/2"
         v-model="form.playerId"
         autofocus
         placeholder="ID de jugador"

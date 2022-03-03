@@ -32,6 +32,7 @@
         "vue3-cookies": "^1.0.6"
     },
     "dependencies": {
+        "vue-gates": "^2.1.2",
         "vue-recaptcha-v3": "^2.0.1"
     }
 }

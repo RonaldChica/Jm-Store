@@ -9,11 +9,11 @@
     <div class="mt-5">
       {{ user.created_at }}
     </div>
-    <div class="flex justify-end border-t mt-5 pt-5">
+    <!-- <div class="flex justify-end border-t mt-5 pt-5">
       <Link class="underline" :href="route('users.show', user.id)">
         Show
       </Link>
-    </div>
+    </div> -->
   </div>
 </template>
 
