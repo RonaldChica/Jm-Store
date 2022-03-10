@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap justify-between">
+  <div class="grid grid-cols-4 gap-4">
     <Card v-for="item in topics" :key="item.id" :topic="item" :removeAction="removeAction" />
   </div>
 </template>

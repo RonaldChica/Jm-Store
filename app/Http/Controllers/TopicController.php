@@ -20,7 +20,7 @@ class TopicController extends Controller
     public function index()
     {
         return Inertia::render('topics/index', [
-            'data' => Topic::orderBy('name')->paginate(5)
+            'data' => Topic::orderBy('name')->paginate(16)
         ]);
     }
 

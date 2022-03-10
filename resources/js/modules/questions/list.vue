@@ -4,12 +4,8 @@
       <HeaderCell v-for="field in fields" :key="field">
         {{ field }}
       </HeaderCell>
-      <HeaderCell>
-        user
-      </HeaderCell>
-      <HeaderCell>
-        actions
-      </HeaderCell>
+      <HeaderCell> user </HeaderCell>
+      <HeaderCell v-role:any="'super|admin'"> actions </HeaderCell>
     </template>
     <template v-slot:tbody>
       <tr v-for="item in questions" :key="item.id">
@@ -17,19 +13,21 @@
           {{ item[key] }}
         </DataCell>
         <DataCell>
-          {{ item?.user?.name }}
+          {{ item.user?.name }}
         </DataCell>
-        <DataCell>
-          <span v-if="!item.readed" class="cursor-pointer underline" @click="markAsRead(item.id)">
+        <DataCell v-role:any="'super|admin'">
+          <span
+            v-if="!item.readed"
+            class="cursor-pointer underline"
+            @click="markAsRead(item.id)"
+          >
             Mark as read
           </span>
         </DataCell>
       </tr>
     </template>
   </Table>
-  <div v-else>
-    No questions
-  </div>
+  <div v-else>No questions</div>
 </template>
 
 <script>
@@ -51,14 +49,8 @@ export default {
   },
   data() {
     return {
-      excludeFields: [
-        'readed',
-        'user',
-        'user_id',
-        'topic',
-        'topic_id'
-      ]
-    }
+      excludeFields: ['id', 'readed', 'user', 'user_id', 'topic', 'topic_id'],
+    };
   },
   computed: {
     fields() {
@@ -68,13 +60,15 @@ export default {
 
       const row = this.questions[0];
 
-      return Object.keys(row).filter((key) => !this.excludeFields.includes(key));
+      return Object.keys(row).filter(
+        (key) => !this.excludeFields.includes(key)
+      );
     },
   },
   methods: {
-    markAsRead (id) {
+    markAsRead(id) {
       this.$inertia.delete(this.route('questions.destroy', id));
-    }
-  }
+    },
+  },
 };
 </script>

@@ -1,5 +1,12 @@
 const mix = require('laravel-mix');
 
+const isProduction = mix.inProduction();
+const config = require('./webpack.config');
+const devConfig = {
+    ...config,
+    devtool: 'inline-source-map'
+}
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -18,8 +25,10 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
         require('autoprefixer'),
     ])
-    .webpackConfig(require('./webpack.config'));
+    .webpackConfig(isProduction ? config : devConfig);
 
-if (mix.inProduction()) {
+if (isProduction) {
     mix.version();
+} else {
+    mix.sourceMaps()
 }

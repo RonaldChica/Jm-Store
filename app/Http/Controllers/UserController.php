@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         return Inertia::render('users/index', [
-            'data' => User::orderBy('name')->paginate(5)
+            'data' => User::orderBy('name')->paginate(20)
         ]);
     }
 

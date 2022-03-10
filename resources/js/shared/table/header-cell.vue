@@ -1,7 +1,6 @@
 <template>
   <th
     class="
-      w-1/4
       border border-gray-300
       dark:border-gray-600
       font-semibold

@@ -3,11 +3,8 @@
     <div class="flex justify-center mb-2">
       <img class="rounded-full" :src="user.avatar" />
     </div>
-    <div class="text-center">
+    <div class="text-center mt-4">
       {{ user.name }}
-    </div>
-    <div class="mt-5">
-      {{ user.created_at }}
     </div>
     <!-- <div class="flex justify-end border-t mt-5 pt-5">
       <Link class="underline" :href="route('users.show', user.id)">

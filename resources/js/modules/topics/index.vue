@@ -9,6 +9,13 @@
           <SwitcherViewMode class="mb-4" @on-change="onChangeViewMode" />
           <List v-if="viewMode === 'list'" :topics="topics" :removeAction="remove" />
           <Grid v-if="viewMode === 'grid'" :topics="topics" :removeAction="remove" />
+
+          <div v-if="noTopics" class="text-lg">
+            <h2 class="text-2xl mb-2">
+              There is no topic registered yet!
+            </h2>
+            Create a new topic to start with the program "Ask Away"
+          </div>
         </div>
         <div
           v-if="showPagination"
@@ -61,6 +68,9 @@ export default {
   computed: {
     showPagination() {
       return this.data.total > this.data.per_page
+    },
+    noTopics() {
+      return this.topics.length === 0
     }
   },
   methods: {

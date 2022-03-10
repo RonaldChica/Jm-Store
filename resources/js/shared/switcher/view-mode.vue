@@ -8,7 +8,7 @@
       @click="setViewMode(viewMode.key)"
     >
       <Button :active="isActive(viewMode)">
-        <span className="h-5 w-5">
+        <span class="h-5 w-5">
           <component :is="viewMode.icon" />
         </span>
       </Button>

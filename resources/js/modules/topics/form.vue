@@ -1,11 +1,10 @@
 <template>
   <form @submit.prevent="submit">
-    <div class="form-control mr-5 h-10">
+    <div class="form-control mr-5 h-10 w-1/2">
       <Input
         id="name"
         type="text"
         name="name"
-        class="md:w-1/2 lg:w-1/4"
         v-model="form.name"
         autofocus
         placeholder="Name"
