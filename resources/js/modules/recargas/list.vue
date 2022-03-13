@@ -2,7 +2,13 @@
   <Table>
     <template v-slot:thead>
       <HeaderCell>
-        name
+        Precio
+      </HeaderCell>
+      <HeaderCell>
+        Diamantes
+      </HeaderCell>
+      <HeaderCell>
+        Bonus
       </HeaderCell>
       <HeaderCell v-for="field in fields" :key="field">
         {{ field }}
@@ -15,18 +21,25 @@
       <tr v-for="item in recargas" :key="item.id">
         <DataCell>
           <Link class="underline mr-2" :href="route('recargas.show', item.id)">
-            {{ item.name }}
+            {{ item.price }}
+          </Link>
+        </DataCell>
+        <DataCell>
+          <Link class="underline mr-2" :href="route('recargas.show', item.id)">
+            {{ item.diamonds }}
+          </Link>
+        </DataCell>
+        <DataCell>
+          <Link class="underline mr-2" :href="route('recargas.show', item.id)">
+            {{ item.bonus }}
           </Link>
         </DataCell>
         <DataCell v-for="key in fields" :key="key">
           {{ item[key] }}
         </DataCell>
         <DataCell v-role:any="'super|admin'">
-          <Link class="font-extrabold underline mr-2" :href="route('recargas.edit', item.id)">
-            Edit
-          </Link>
           <span class="font-extrabold cursor-pointer underline" @click="removeAction(item.id)">
-            Remove
+            Recargar
           </span>
         </DataCell>
       </tr>

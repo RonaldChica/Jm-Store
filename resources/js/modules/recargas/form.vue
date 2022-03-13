@@ -5,13 +5,13 @@
         id="name"
         type="text"
         name="name"
-        v-model="form.name"
+        v-model="form.playerId"
         autofocus
-        placeholder="Name"
+        placeholder="Id de Jugador"
       />
-      <InputError :message="errors?.name" />
+      <InputError :message="errors?.playerId" />
     </div>
-    <Button class="mt-10" type="submit">Submit</Button>
+    <Button class="mt-10" type="submit">Recargar</Button>
   </form>
 </template>
 
@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        name: this.recarga?.name || '',
+        playerId: this.recarga?.playerId || '',
       }),
     };
   },
