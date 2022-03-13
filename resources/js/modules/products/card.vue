@@ -1,9 +1,13 @@
 <template>
   <div class="border rounded p-5 mb-5">
     <div class="text-center">
-      <Link class="underline" :href="route('topics.show', product.id)">
-        {{ product.name }}
-      </Link>
+      {{ product.price }}
+    </div>
+    <div class="text-center">
+      {{ product.diamantes }}
+    </div>
+    <div class="text-center">
+      {{ product.bonus }}
     </div>
     <div class="mt-5">
       {{ product.created_at }}
