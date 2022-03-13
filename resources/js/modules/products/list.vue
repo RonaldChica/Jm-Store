@@ -1,31 +1,27 @@
 <template>
   <Table>
     <template v-slot:thead>
-      <HeaderCell>
-        name
-      </HeaderCell>
       <HeaderCell v-for="field in fields" :key="field">
         {{ field }}
       </HeaderCell>
-      <HeaderCell v-role:any="'super|admin'">
-        actions
-      </HeaderCell>
+      <HeaderCell v-role:any="'super|admin'"> actions </HeaderCell>
     </template>
     <template v-slot:tbody>
       <tr v-for="item in products" :key="item.id">
-        <DataCell>
-          <Link class="underline mr-2" :href="route('products.show', item.id)">
-            {{ item.name }}
-          </Link>
-        </DataCell>
         <DataCell v-for="key in fields" :key="key">
           {{ item[key] }}
         </DataCell>
         <DataCell v-role:any="'super|admin'">
-          <Link class="font-extrabold underline mr-2" :href="route('products.edit', item.id)">
+          <Link
+            class="font-extrabold underline mr-2"
+            :href="route('products.edit', item.id)"
+          >
             Edit
           </Link>
-          <span class="font-extrabold cursor-pointer underline" @click="removeAction(item.id)">
+          <span
+            class="font-extrabold cursor-pointer underline"
+            @click="removeAction(item.id)"
+          >
             Remove
           </span>
         </DataCell>
@@ -50,15 +46,12 @@ export default {
   },
   props: {
     products: Array,
-    removeAction: Function
+    removeAction: Function,
   },
   data() {
     return {
-      excludeFields: [
-        'id',
-        'name'
-      ]
-    }
+      excludeFields: ['id', 'name'],
+    };
   },
   computed: {
     fields() {
@@ -68,8 +61,10 @@ export default {
 
       const row = this.products[0];
 
-      return Object.keys(row).filter((key) => !this.excludeFields.includes(key));
+      return Object.keys(row).filter(
+        (key) => !this.excludeFields.includes(key)
+      );
     },
-  }
+  },
 };
 </script>

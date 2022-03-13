@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function index()
     {
         return Inertia::render('products/index', [
-            'data' => Product::orderBy('name')->paginate(16)
+            'data' => Product::orderBy('diamantes')->paginate(16)
         ]);
     }
 
@@ -32,10 +32,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $topic = Product::findOrFail($id);
+        $product = Product::findOrFail($id);
 
         return Inertia::render('products/edit', [
-            'data' => $topic
+            'data' => $product
         ]);
     }
 
@@ -47,11 +47,13 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $topic = new Product;
-        $topic->name = $request->input('name');
-        $topic->save();
+        $product = new Product;
+        $product->price = $request->input('price');
+        $product->diamantes = $request->input('diamantes');
+        $product->bonus = $request->input('bonus');
+        $product->save();
 
-        ProductCreatedEvent::dispatch($topic);
+        ProductCreatedEvent::dispatch($product);
 
         return Redirect::route('products.index');
     }
@@ -65,11 +67,13 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
-        $topic = Product::findOrFail($id);
-        $topic->name = $request->input('name');
-        $topic->save();
+        $product = Product::findOrFail($id);
+        $product->price = $request->input('price');
+        $product->diamantes = $request->input('diamantes');
+        $product->bonus = $request->input('bonus');
+        $product->save();
 
-        ProductUpdatedEvent::dispatch($topic);
+        ProductUpdatedEvent::dispatch($product);
 
         return Redirect::route('products.index');
     }
@@ -82,11 +86,11 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $topic = Product::findOrFail($id);
+        $product = Product::findOrFail($id);
 
-        ProductRemovedEvent::dispatch($topic);
+        ProductRemovedEvent::dispatch($product);
 
-        $topic->delete();
+        $product->delete();
 
         return Redirect::route('products.index');
     }

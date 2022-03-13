@@ -26,7 +26,7 @@
         </DataCell>
         <DataCell>
           <Link class="underline mr-2" :href="route('recargas.show', item.id)">
-            {{ item.diamonds }}
+            {{ item.diamantes }}
           </Link>
         </DataCell>
         <DataCell>

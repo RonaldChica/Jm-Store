@@ -20,7 +20,7 @@ import { Head } from '@inertiajs/inertia-vue3';
 
 import AuthenticatedLayout from '@core/layout/authenticated';
 
-import Form from '@modules/topics/form';
+import Form from '@modules/products/form';
 
 export default {
   components: {

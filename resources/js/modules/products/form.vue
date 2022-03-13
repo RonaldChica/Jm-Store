@@ -1,15 +1,42 @@
 <template>
   <form @submit.prevent="submit">
-    <div class="form-control mr-5 h-10 w-1/2">
-      <Input
-        id="name"
-        type="text"
-        name="name"
-        v-model="form.name"
-        autofocus
-        placeholder="Name"
-      />
-      <InputError :message="errors?.name" />
+    <div class="w-full flex">
+      <div class="form-control mr-5 h-10 w-1/3">
+        <Input
+          id="price"
+          type="number"
+          name="price"
+          v-model.number="form.price"
+          autofocus
+          placeholder="Precio"
+          min="0.00"
+          max="1000.00"
+          step="any"
+        />
+        <InputError :message="errors?.price" />
+      </div>
+      <div class="form-control mr-5 h-10 w-1/3">
+        <Input
+          id="diamantes"
+          type="text"
+          name="diamantes"
+          v-model="form.diamantes"
+          autofocus
+          placeholder="Diamantes"
+        />
+        <InputError :message="errors?.diamantes" />
+      </div>
+      <div class="form-control mr-5 h-10 w-1/3">
+        <Input
+          id="bonus"
+          type="text"
+          name="bonus"
+          v-model="form.bonus"
+          autofocus
+          placeholder="Bonus"
+        />
+        <InputError :message="errors?.bonus" />
+      </div>
     </div>
     <Button class="mt-10" type="submit">Submit</Button>
   </form>
@@ -39,7 +66,9 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        name: this.product?.name || '',
+        price: this.product?.price || '',
+        diamantes: this.product?.diamantes || '',
+        bonus: this.product?.bonus || '',
       }),
     };
   },
