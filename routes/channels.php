@@ -1,7 +1,9 @@
 <?php
 
+use App\Broadcasting\ProductChannel;
 use Illuminate\Support\Facades\Broadcast;
 use App\Broadcasting\QuestionChannel;
+use App\Broadcasting\RecargaChannel;
 use App\Broadcasting\TopicChannel;
 use App\Broadcasting\TopicQuestionChannel;
 
@@ -18,5 +20,6 @@ use App\Broadcasting\TopicQuestionChannel;
 
 Broadcast::channel('topics', TopicChannel::class);
 Broadcast::channel('recargas', RecargaChannel::class);
+Broadcast::channel('products', ProductChannel::class);
 Broadcast::channel('questions', QuestionChannel::class);
 Broadcast::channel('topics.{id}.question', TopicQuestionChannel::class);

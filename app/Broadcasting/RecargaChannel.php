@@ -4,7 +4,7 @@ namespace App\Broadcasting;
 
 use App\Models\User;
 
-class TopicChannel
+class RecargaChannel
 {
     /**
      * Create a new channel instance.
