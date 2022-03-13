@@ -2,8 +2,12 @@
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="sm:rounded-lg">
-        <div class="mt-6 p-6 shadow-sm bg-white border-b border-gray-200">
-          <Form :errors="errors" />
+        <div class="lg:text-center">
+          <h2
+            class="text-base text-indigo-600 font-semibold tracking-wide uppercase"
+          >
+            Saldo $ {{ $page.props.auth.user.saldo }}
+          </h2>
         </div>
         <div class="mt-6 p-6 shadow-sm bg-white border-b border-gray-200">
           <SwitcherViewMode class="mb-4" @on-change="onChangeViewMode" />

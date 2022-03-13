@@ -1,46 +1,20 @@
 <template>
   <Table>
     <template v-slot:thead>
-      <HeaderCell>
-        Precio
-      </HeaderCell>
-      <HeaderCell>
-        Diamantes
-      </HeaderCell>
-      <HeaderCell>
-        Bonus
-      </HeaderCell>
       <HeaderCell v-for="field in fields" :key="field">
         {{ field }}
       </HeaderCell>
-      <HeaderCell v-role:any="'super|admin'">
-        actions
-      </HeaderCell>
+      <HeaderCell v-role:any="'super|admin'"> actions </HeaderCell>
     </template>
     <template v-slot:tbody>
       <tr v-for="item in recargas" :key="item.id">
-        <DataCell>
-          <Link class="underline mr-2" :href="route('recargas.show', item.id)">
-            {{ item.price }}
-          </Link>
-        </DataCell>
-        <DataCell>
-          <Link class="underline mr-2" :href="route('recargas.show', item.id)">
-            {{ item.diamantes }}
-          </Link>
-        </DataCell>
-        <DataCell>
-          <Link class="underline mr-2" :href="route('recargas.show', item.id)">
-            {{ item.bonus }}
-          </Link>
-        </DataCell>
         <DataCell v-for="key in fields" :key="key">
           {{ item[key] }}
         </DataCell>
         <DataCell v-role:any="'super|admin'">
-          <span class="font-extrabold cursor-pointer underline" @click="removeAction(item.id)">
+          <Link class="font-extrabold underline mr-2" :href="route('recargas.edit', item.id)">
             Recargar
-          </span>
+          </Link>
         </DataCell>
       </tr>
     </template>
@@ -63,15 +37,12 @@ export default {
   },
   props: {
     recargas: Array,
-    removeAction: Function
+    removeAction: Function,
   },
   data() {
     return {
-      excludeFields: [
-        'id',
-        'name'
-      ]
-    }
+      excludeFields: ['id','created_at', 'updated_at'],
+    };
   },
   computed: {
     fields() {
@@ -81,8 +52,10 @@ export default {
 
       const row = this.recargas[0];
 
-      return Object.keys(row).filter((key) => !this.excludeFields.includes(key));
+      return Object.keys(row).filter(
+        (key) => !this.excludeFields.includes(key)
+      );
     },
-  }
+  },
 };
 </script>

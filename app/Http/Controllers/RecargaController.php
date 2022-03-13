@@ -6,7 +6,10 @@ use App\Events\Recarga\RecargaCreatedEvent;
 use App\Events\Recarga\RecargaRemovedEvent;
 use App\Events\Recarga\RecargaUpdatedEvent;
 use App\Http\Requests\RecargaRequest;
+use App\Models\Product;
 use App\Models\Recarga;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -20,7 +23,7 @@ class RecargaController extends Controller
     public function index()
     {
         return Inertia::render('recargas/index', [
-            'data' => Recarga::orderBy('playerId')->paginate(5)
+            'data' => Product::orderBy('diamantes')->paginate(5)
         ]);
     }
 
@@ -32,7 +35,7 @@ class RecargaController extends Controller
      */
     public function edit($id)
     {
-        $recarga = Recarga::findOrFail($id);
+        $recarga = Product::findOrFail($id);
 
         return Inertia::render('recargas/edit', [
             'data' => $recarga
@@ -80,11 +83,20 @@ class RecargaController extends Controller
      */
     public function update(RecargaRequest $request, $id)
     {
-        $recarga = Recarga::findOrFail($id);
+        $product = Product::findOrFail($id);
+        $user = User::findOrFail(Auth::user()->id);
+        $recarga = new Recarga;
+
         $recarga->playerId = $request->input('playerId');
+        $recarga->product_id = $id;
+        $recarga->user_id = $user->id;
+
+        $user->saldo -= $product->price;
+
+        $user->save();
         $recarga->save();
 
-        RecargaUpdatedEvent::dispatch($recarga);
+        RecargaCreatedEvent::dispatch($recarga);
 
         return Redirect::route('recargas.index');
     }
