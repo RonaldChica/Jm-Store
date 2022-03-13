@@ -1,26 +1,31 @@
 <template>
   <Table>
     <template v-slot:thead>
+      <HeaderCell>
+        name
+      </HeaderCell>
       <HeaderCell v-for="field in fields" :key="field">
         {{ field }}
       </HeaderCell>
-      <HeaderCell>
+      <HeaderCell v-role:any="'super|admin'">
         actions
       </HeaderCell>
     </template>
     <template v-slot:tbody>
       <tr v-for="item in recargas" :key="item.id">
+        <DataCell>
+          <Link class="underline mr-2" :href="route('recargas.show', item.id)">
+            {{ item.name }}
+          </Link>
+        </DataCell>
         <DataCell v-for="key in fields" :key="key">
           {{ item[key] }}
         </DataCell>
-        <DataCell>
-          <Link class="underline mr-2" :href="route('recargas.show', item.id)">
-            Show
-          </Link>
-          <Link class="underline mr-2" :href="route('recargas.edit', item.id)">
+        <DataCell v-role:any="'super|admin'">
+          <Link class="font-extrabold underline mr-2" :href="route('recargas.edit', item.id)">
             Edit
           </Link>
-          <span class="cursor-pointer underline" @click="removeAction(item.id)">
+          <span class="font-extrabold cursor-pointer underline" @click="removeAction(item.id)">
             Remove
           </span>
         </DataCell>
@@ -47,6 +52,14 @@ export default {
     recargas: Array,
     removeAction: Function
   },
+  data() {
+    return {
+      excludeFields: [
+        'id',
+        'name'
+      ]
+    }
+  },
   computed: {
     fields() {
       if (this.recargas.length <= 0) {
@@ -55,7 +68,7 @@ export default {
 
       const row = this.recargas[0];
 
-      return Object.keys(row);
+      return Object.keys(row).filter((key) => !this.excludeFields.includes(key));
     },
   }
 };

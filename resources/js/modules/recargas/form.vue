@@ -1,18 +1,17 @@
 <template>
   <form @submit.prevent="submit">
-    <div class="form-control w-1/2 mr-5 h-10">
+    <div class="form-control mr-5 h-10 w-1/2">
       <Input
-        id="playerId"
+        id="name"
         type="text"
-        playerId="playerId"
-        class="w-1/2"
-        v-model="form.playerId"
+        name="name"
+        v-model="form.name"
         autofocus
-        placeholder="ID de jugador"
+        placeholder="Name"
       />
-      <InputError :message="errors?.playerId" />
+      <InputError :message="errors?.name" />
     </div>
-    <Button class="mt-10" type="submit">Recargar</Button>
+    <Button class="mt-10" type="submit">Submit</Button>
   </form>
 </template>
 
@@ -40,7 +39,7 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        playerId: this.recarga?.playerId || '',
+        name: this.recarga?.name || '',
       }),
     };
   },

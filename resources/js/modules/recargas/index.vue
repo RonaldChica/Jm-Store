@@ -7,20 +7,25 @@
         </div>
         <div class="mt-6 p-6 shadow-sm bg-white border-b border-gray-200">
           <SwitcherViewMode class="mb-4" @on-change="onChangeViewMode" />
-          <List v-if="viewMode === 'list'" :recargas="recargas" :removeAction="remove" />
-          <Grid v-if="viewMode === 'grid'" :recargas="recargas" :removeAction="remove" />
+          <List
+            v-if="viewMode === 'list'"
+            :recargas="recargas"
+            :removeAction="remove"
+          />
+          <Grid
+            v-if="viewMode === 'grid'"
+            :recargas="recargas"
+            :removeAction="remove"
+          />
+
+          <div v-if="noRecargas" class="text-lg">
+            <h2 class="text-2xl mb-2">There is no topic registered yet!</h2>
+            Create a new topic to start with the program "Ask Away"
+          </div>
         </div>
         <div
           v-if="showPagination"
-          class="
-            mt-6
-            p-6
-            shadow-sm
-            bg-white
-            border-b border-gray-200
-            flex
-            justify-center
-          "
+          class="mt-6 p-6 shadow-sm bg-white border-b border-gray-200 flex justify-center"
         >
           <Pagination :links="data.links" />
         </div>
@@ -43,33 +48,36 @@ export default {
     Pagination,
     List,
     Grid,
-    Form
+    Form,
   },
   props: {
     data: Object,
     recargas: Array,
     errors: {
       type: Object,
-      required: false
-    }
+      required: false,
+    },
   },
   data() {
     return {
-      viewMode: ''
+      viewMode: '',
     };
   },
   computed: {
     showPagination() {
-      return this.data.total > this.data.per_page
-    }
+      return this.data.total > this.data.per_page;
+    },
+    noRecargas() {
+      return this.recargas.length === 0;
+    },
   },
   methods: {
     onChangeViewMode(viewMode) {
       this.viewMode = viewMode;
     },
-    remove (id) {
-      this.$inertia.delete(this.route('recargas.destroy', id))
-    }
-  }
+    remove(id) {
+      this.$inertia.delete(this.route('recargas.destroy', id));
+    },
+  },
 };
 </script>
