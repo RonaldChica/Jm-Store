@@ -30,5 +30,5 @@ mix.js('resources/js/app.js', 'public/js')
 if (isProduction) {
     mix.version();
 } else {
-    mix.sourceMaps()
+    mix.sourceMaps();
 }
