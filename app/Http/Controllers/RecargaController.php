@@ -11,6 +11,7 @@ use App\Models\Recarga;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class RecargaController extends Controller
@@ -93,12 +94,18 @@ class RecargaController extends Controller
 
         $user->saldo -= $product->price;
 
-        $user->save();
-        $recarga->save();
+        if ($user->saldo > 0) {
+            $user->save();
+            $recarga->save();
 
-        RecargaCreatedEvent::dispatch($recarga);
+            RecargaCreatedEvent::dispatch($recarga);
 
-        return Redirect::route('recargas.index');
+            return Redirect::route('recargas.index');
+        } else {
+            throw ValidationException::withMessages([
+                'create' => 'Saldo Insuficiente',
+            ]);
+        }
     }
 
     /**

@@ -1,4 +1,10 @@
 <template>
+  <div
+    class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+    role="alert"
+  >
+    <span class="font-medium"> {{ error }}</span>
+  </div>
   <form @submit.prevent="submit">
     <div class="form-control mr-5 h-10 w-1/2">
       <Input
@@ -38,6 +44,7 @@ export default {
   },
   data() {
     return {
+      error: '',
       form: this.$inertia.form({
         playerId: this.recarga?.playerId || '',
       }),
@@ -46,14 +53,13 @@ export default {
   methods: {
     submit() {
       const options = {
-        preserveState: false,
+        preserveState: true,
         onFinish: () => this.form.reset(),
+        onError: (errors) => this.error = errors.create,
       };
 
       if (this.recarga?.id) {
         this.form.put(`/recargas/${this.recarga.id}`, options);
-      } else {
-        this.form.post('/recargas', options);
       }
     },
   },
