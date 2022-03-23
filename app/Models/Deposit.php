@@ -23,7 +23,6 @@ class Deposit extends Model
      */
     protected $fillable = [
         'valor',
-        'banco',
         'numeroComprobante',
         'imagenComprobante'
     ];
