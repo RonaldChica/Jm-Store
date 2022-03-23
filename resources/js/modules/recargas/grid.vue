@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-4 gap-4">
-    <Card v-for="item in recargas" :key="item.id" :topic="item" :removeAction="removeAction" />
+    <Card v-for="item in recargas" :key="item.id" :recarga="item" :removeAction="removeAction" />
   </div>
 </template>
 

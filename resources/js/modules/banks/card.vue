@@ -1,16 +1,7 @@
 <template>
   <div class="border rounded p-5 mb-5">
     <div class="text-center">
-      {{ bank.price }}
-    </div>
-    <div class="text-center">
-      {{ bank.diamantes }}
-    </div>
-    <div class="text-center">
-      {{ bank.bonus }}
-    </div>
-    <div class="mt-5">
-      {{ bank.created_at }}
+      {{ bank.name }}
     </div>
     <div
       v-role:any="'super|admin'"
@@ -18,7 +9,7 @@
     >
       <Link
         class="font-extrabold underline"
-        :href="route('topics.edit', bank.id)"
+        :href="route('banks.edit', bank.id)"
       >
         Edit
       </Link>
