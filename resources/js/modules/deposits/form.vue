@@ -3,39 +3,48 @@
     <div class="w-full flex">
       <div class="form-control mr-5 h-10 w-1/3">
         <Input
-          id="price"
+          id="valor"
           type="number"
-          name="price"
-          v-model.number="form.price"
+          name="valor"
+          v-model.number="form.valor"
           autofocus
-          placeholder="Precio"
+          placeholder="Valor del depósito"
           min="0.00"
           max="1000.00"
           step="any"
         />
-        <InputError :message="errors?.price" />
+        <InputError :message="errors?.valor" />
       </div>
       <div class="form-control mr-5 h-10 w-1/3">
         <Input
-          id="diamantes"
+          id="comprobante"
           type="text"
-          name="diamantes"
-          v-model="form.diamantes"
+          name="comprobante"
+          v-model="form.comprobante"
           autofocus
-          placeholder="Diamantes"
+          placeholder="Número del comprobante"
         />
-        <InputError :message="errors?.diamantes" />
+        <InputError :message="errors?.comprobante" />
       </div>
       <div class="form-control mr-5 h-10 w-1/3">
-        <Input
-          id="bonus"
-          type="text"
-          name="bonus"
-          v-model="form.bonus"
-          autofocus
-          placeholder="Bonus"
+        <select
+          class="border border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full"
+          v-model="form.bank"
+          placeholder="Banco"
+        >
+          <option value="">Seleccione un banco</option>
+          <option v-for="item in banks" value="item.id" :key="item.id">
+            {{ item.name }}
+          </option>
+        </select>
+        <InputError :message="errors?.bank" />
+      </div>
+      <div class="form-control mr-5 h-10 w-1/3">
+        <InputFile
+          id="imagen"
+          v-model="form.imagen"
         />
-        <InputError :message="errors?.bonus" />
+        <InputError :message="errors?.comprobante" />
       </div>
     </div>
     <Button class="mt-10" type="submit">Submit</Button>
@@ -44,17 +53,25 @@
 
 <script>
 import Input from '@/shared/base/input';
+import InputFile from '@/shared/base/input-file';
+import Select from '@/shared/base/select';
 import InputError from '@/shared/base/input-error';
 import Button from '@/shared/base/button';
 
 export default {
   components: {
     Input,
+    InputFile,
+    Select,
     InputError,
     Button,
   },
   props: {
     deposit: {
+      type: Object,
+      required: false,
+    },
+    banks: {
       type: Object,
       required: false,
     },
@@ -66,9 +83,9 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        price: this.deposit?.price || '',
-        diamantes: this.deposit?.diamantes || '',
-        bonus: this.deposit?.bonus || '',
+        valor: this.deposit?.valor || '',
+        comprobante: this.deposit?.comprobante || '',
+        bank: this.deposit?.bank || '',
       }),
     };
   },

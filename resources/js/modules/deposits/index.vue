@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="sm:rounded-lg">
         <div class="mt-6 p-6 shadow-sm bg-white border-b border-gray-200">
-          <Form :errors="errors" />
+          <Form :errors="errors" :banks="banks" />
         </div>
         <div class="mt-6 p-6 shadow-sm bg-white border-b border-gray-200">
           <SwitcherViewMode class="mb-4" @on-change="onChangeViewMode" />
@@ -55,6 +55,7 @@ export default {
   props: {
     data: Object,
     deposits: Array,
+    banks: Array,
     errors: {
       type: Object,
       required: false

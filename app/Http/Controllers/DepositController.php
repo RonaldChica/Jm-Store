@@ -6,6 +6,7 @@ use App\Events\Deposit\DepositCreatedEvent;
 use App\Events\Deposit\DepositRemovedEvent;
 use App\Events\Deposit\DepositUpdatedEvent;
 use App\Http\Requests\DepositRequest;
+use App\Models\Bank;
 use App\Models\Deposit;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -20,7 +21,8 @@ class DepositController extends Controller
     public function index()
     {
         return Inertia::render('deposits/index', [
-            'data' => Deposit::orderBy('diamantes')->paginate(16)
+            'data' => Deposit::orderBy('id')->paginate(16),
+            'banks' => Bank::orderBy('name')->paginate(16),
         ]);
     }
 

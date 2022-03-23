@@ -5,7 +5,7 @@
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">Deposits</h2>
     </template>
-    <Deposits :data="data" :errors="errors" :deposits="deposits" />
+    <Deposits :data="data" :errors="errors" :deposits="deposits" :banks="banks"/>
   </AuthenticatedLayout>
 </template>
 
@@ -46,6 +46,7 @@ export default {
   },
   props: {
     data: Object,
+    banks: Object,
     errors: {
       type: Object,
       required: false,
@@ -56,6 +57,7 @@ export default {
 
     return {
       deposits: data,
+      banks: props.banks.data
     };
   },
   mounted() {

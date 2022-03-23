@@ -21,12 +21,12 @@
                 >
                   Bancos
                 </NavLink>
-                <!-- <NavLink
+                <NavLink
                   :href="route('deposits.index')"
                   :active="route().current().includes('deposits')"
                 >
                   Depósitos
-                </NavLink> -->
+                </NavLink>
                 <NavLink
                   :href="route('products.index')"
                   :active="route().current().includes('products')"
