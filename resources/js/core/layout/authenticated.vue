@@ -16,6 +16,18 @@
               <!-- Navigation Links -->
               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 <NavLink
+                  :href="route('banks.index')"
+                  :active="route().current().includes('banks')"
+                >
+                  Bancos
+                </NavLink>
+                <!-- <NavLink
+                  :href="route('deposits.index')"
+                  :active="route().current().includes('deposits')"
+                >
+                  Depósitos
+                </NavLink> -->
+                <NavLink
                   :href="route('products.index')"
                   :active="route().current().includes('products')"
                 >

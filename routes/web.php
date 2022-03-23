@@ -35,6 +35,14 @@ Route::resource('products', ProductController::class)
     ->middleware(['auth', 'verified'])
     ->except(['create']);
 
+Route::resource('deposits', ProductController::class)
+    ->middleware(['auth', 'verified'])
+    ->except(['create']);
+
+Route::resource('banks', ProductController::class)
+    ->middleware(['auth', 'verified'])
+    ->except(['create']);
+
 Route::resource('questions', QuestionController::class)
     ->middleware(['auth', 'verified'])
     ->only(['store', 'update', 'destroy']);
