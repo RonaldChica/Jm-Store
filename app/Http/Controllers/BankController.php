@@ -20,7 +20,7 @@ class BankController extends Controller
     public function index()
     {
         return Inertia::render('banks/index', [
-            'data' => Bank::orderBy('diamantes')->paginate(16)
+            'data' => Bank::orderBy('name')->paginate(16)
         ]);
     }
 
@@ -32,10 +32,10 @@ class BankController extends Controller
      */
     public function edit($id)
     {
-        $deposit = Bank::findOrFail($id);
+        $bank = Bank::findOrFail($id);
 
         return Inertia::render('banks/edit', [
-            'data' => $deposit
+            'data' => $bank
         ]);
     }
 
@@ -47,13 +47,11 @@ class BankController extends Controller
      */
     public function store(BankRequest $request)
     {
-        $deposit = new Bank;
-        $deposit->price = $request->input('price');
-        $deposit->diamantes = $request->input('diamantes');
-        $deposit->bonus = $request->input('bonus');
-        $deposit->save();
+        $bank = new Bank;
+        $bank->name = $request->input('name');
+        $bank->save();
 
-        BankCreatedEvent::dispatch($deposit);
+        BankCreatedEvent::dispatch($bank);
 
         return Redirect::route('banks.index');
     }
@@ -67,13 +65,11 @@ class BankController extends Controller
      */
     public function update(BankRequest $request, $id)
     {
-        $deposit = Bank::findOrFail($id);
-        $deposit->price = $request->input('price');
-        $deposit->diamantes = $request->input('diamantes');
-        $deposit->bonus = $request->input('bonus');
-        $deposit->save();
+        $bank = Bank::findOrFail($id);
+        $bank->name = $request->input('name');
+        $bank->save();
 
-        BankUpdatedEvent::dispatch($deposit);
+        BankUpdatedEvent::dispatch($bank);
 
         return Redirect::route('banks.index');
     }
@@ -86,11 +82,11 @@ class BankController extends Controller
      */
     public function destroy($id)
     {
-        $deposit = Bank::findOrFail($id);
+        $bank = Bank::findOrFail($id);
 
-        BankRemovedEvent::dispatch($deposit);
+        BankRemovedEvent::dispatch($bank);
 
-        $deposit->delete();
+        $bank->delete();
 
         return Redirect::route('banks.index');
     }

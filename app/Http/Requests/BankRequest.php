@@ -24,8 +24,7 @@ class BankRequest extends FormRequest
     public function rules()
     {
         return [
-            'price' => ['required'],
-            'diamantes' => ['required']
+            'name' => ['required'],
         ];
     }
 }

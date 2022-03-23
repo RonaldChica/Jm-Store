@@ -14,7 +14,7 @@ class Bank extends Model
      *
      * @var string
      */
-    protected $table = 'bank';
+    protected $table = 'banks';
 
     /**
      * The attributes that are mass assignable.

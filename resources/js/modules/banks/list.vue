@@ -50,7 +50,7 @@ export default {
   },
   data() {
     return {
-      excludeFields: ['id', 'name'],
+      excludeFields: ['id'],
     };
   },
   computed: {

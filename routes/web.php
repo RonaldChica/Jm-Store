@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BankController;
+use App\Http\Controllers\DepositController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
@@ -35,11 +37,11 @@ Route::resource('products', ProductController::class)
     ->middleware(['auth', 'verified'])
     ->except(['create']);
 
-Route::resource('deposits', ProductController::class)
+Route::resource('deposits', DepositController::class)
     ->middleware(['auth', 'verified'])
     ->except(['create']);
 
-Route::resource('banks', ProductController::class)
+Route::resource('banks', BankController::class)
     ->middleware(['auth', 'verified'])
     ->except(['create']);
 
