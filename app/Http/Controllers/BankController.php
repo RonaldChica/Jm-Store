@@ -19,6 +19,7 @@ class BankController extends Controller
      */
     public function index()
     {
+        sleep(3);
         return Inertia::render('banks/index', [
             'data' => Bank::orderBy('name')->paginate(16)
         ]);
